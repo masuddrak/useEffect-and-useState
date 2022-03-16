@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   return (
@@ -10,7 +10,13 @@ function App() {
   );
 }
 function ExternalUser() {
-  const [users,setUsers]=useState([])
+  const [users,setUsers]=useState([]);
+  console.log(users)
+  useEffect(()=>{
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res=>res.json())
+    .then(data=>setUsers(data))
+  },[])
   return (
     <div className="externalUser">
       <h2>External User</h2>
