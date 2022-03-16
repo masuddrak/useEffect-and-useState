@@ -11,7 +11,6 @@ function App() {
 }
 function ExternalUser() {
   const [users,setUsers]=useState([]);
-  console.log(users)
   useEffect(()=>{
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(res=>res.json())
@@ -20,8 +19,22 @@ function ExternalUser() {
   return (
     <div className="externalUser">
       <h2>External User</h2>
+      <p>{users.length}</p>
+          {
+            users.map(user=><Users name={user.name} email={user.email} phone={user.phone}></Users>)
+          }
     </div>
   );
 }
+function Users(props) {
+  return (
+    <div className="user">
+      <h3>Name:{props.name}</h3>
+      <p>Email:{props.email}</p>
+      <p>Phone:{props.phone}</p>
+    </div>
+  );
+}
+
 
 export default App;
